@@ -59,6 +59,10 @@ const SpaceBook = function() {
       }
     },
 
+    toggleComments: function (currentPost) {
+      
+    },
+
     removePost: function (id) {
       const post = _findPost(id);
       posts.splice(posts.indexOf(post), 1);
