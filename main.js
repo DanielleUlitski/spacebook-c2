@@ -46,7 +46,7 @@ const SpaceBook = function() {
       $posts.empty();
       for (let i = 0; i < posts.length; i++) {
       let $post =  $('<div class="post" data-id=' + posts[i].id + '><p><a href="#" class="remove-post">Remove</a> ' + posts[i].text + 
-        '</p> <div class="comments"></div> <input type="button" class="comment-toggle" /> <form><input type="text" class="user-name" placeholder="User Name" /><input type="text" class="comment-text form-control" placeholder="Your Comment" /></form></div>');
+        '</p> <div class="comments"></div> <input type="button" class="comment-toggle btn-primary btn" value="Toggle comments" /> <form><input type="text" class="user-name" placeholder="User Name" /><input type="text" class="comment-text form-control" placeholder="Your Comment" /></form></div>');
         this.addComments($post , posts[i])
         $posts.append($post);
       }
@@ -61,6 +61,7 @@ const SpaceBook = function() {
 
     toggleComments: function (currentPost) {
       let $comments = $(this).closest(".post").find("comments");
+      $comments.toggleClass('hide');
     },
 
     removePost: function (id) {
@@ -107,13 +108,17 @@ $(".posts").on("keyup", ".comment-text", function () {
   }
 })
 
+$(".posts").on("click", ".comment-toggle", function () {
+  
+})
+
 $(function(){
   $(".posts").sortable();
   $(".posts").disableSelection();
 })
 
-$(".posts").on("click", ".post", function() {
+// $(".posts").on("click", ".post", function() {
   
-  $(this).dialog();
-  app.renderPosts();
-});
+//   $(this).dialog();
+//   app.renderPosts();
+// });

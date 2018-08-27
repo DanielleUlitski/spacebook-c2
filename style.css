@@ -37,3 +37,10 @@ a:hover {
     color: black;
 }
 
+.comment-toggle {
+    
+}
+
+.hide {
+    display: none;
+}
