@@ -20,6 +20,8 @@ const SpaceBook = function() {
   }
 
   return {
+    findPost: _findPost,
+
     createPost: function(text) {
       const post = {
         id: currentId,
@@ -45,8 +47,8 @@ const SpaceBook = function() {
     renderPosts: function () {
       $posts.empty();
       for (let i = 0; i < posts.length; i++) {
-      let $post =  $('<div class="post" data-id=' + posts[i].id + '><p><a href="#" class="remove-post">Remove</a> ' + posts[i].text + 
-        '</p> <div class="comments"></div> <input type="button" class="comment-toggle btn-primary btn" value="Toggle comments" /> <form><input type="text" class="user-name" placeholder="User Name" /><input type="text" class="comment-text form-control" placeholder="Your Comment" /></form></div>');
+      let $post =  $('<div class="post" data-id=' + posts[i].id + '><p class="dialog"><a href="#" class="remove-post">Remove</a> ' + posts[i].text + 
+        '</p> <input type="button" class="comment-toggle btn-primary btn" value="Toggle comments" /> <div class="comments"></div> <form><input type="text" class="user-name" placeholder="User Name" /><input type="text" class="comment-text form-control" placeholder="Your Comment" /></form></div>');
         this.addComments($post , posts[i])
         $posts.append($post);
       }
@@ -59,8 +61,8 @@ const SpaceBook = function() {
       }
     },
 
-    toggleComments: function (currentPost) {
-      let $comments = $(this).closest(".post").find("comments");
+    toggleComments: function (currentBtn) {
+      let $comments = currentBtn.closest(".post").find(".comments");
       $comments.toggleClass('hide');
     },
 
@@ -109,7 +111,7 @@ $(".posts").on("keyup", ".comment-text", function () {
 })
 
 $(".posts").on("click", ".comment-toggle", function () {
-  
+  app.toggleComments($(this));
 })
 
 $(function(){
@@ -117,8 +119,7 @@ $(function(){
   $(".posts").disableSelection();
 })
 
-// $(".posts").on("click", ".post", function() {
-  
-//   $(this).dialog();
-//   app.renderPosts();
-// });
+$(".posts").on("click", ".dialog", function() {
+  $(this).closest('.post').dialog();
+  app.renderPosts();
+});
